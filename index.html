@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lluvia de Amor con Diente de León</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #1a1a2e;
+      overflow-x: hidden;
+      overflow-y: auto;
+      font-family: 'Courier New', Courier, monospace;
+      color: #e6ccff;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 10%;
+      font-size: 3em;
+      color: #e6ccff;
+      text-shadow: 2px 2px 8px #b266ff;
+      animation: pulse 3s infinite;
+    }
+    .mensaje {
+      padding: 20px;
+      font-size: 1.5em;
+      max-width: 90%;
+      margin: auto;
+      line-height: 1.6;
+      color: #e6ccff;
+      text-shadow: 1px 1px 4px #b266ff;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: fall linear infinite;
+      z-index: 1;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+    @keyframes fall {
+      0% { top: -10%; opacity: 1; }
+      100% { top: 110%; opacity: 0; }
+    }
+    .te-amo {
+      position: absolute;
+      color: #ffb6f9;
+      font-size: 1.2em;
+      font-weight: bold;
+      pointer-events: none;
+      animation: floatUp 1.5s ease-out forwards;
+      text-shadow: 1px 1px 3px white;
+      z-index: 2;
+    }
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100px); opacity: 0; }
+    }
+    .flor {
+      position: relative;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: auto;
+      pointer-events: none;
+      z-index: 2;
+      background-image: url('data:image/png;base64,...');
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .boton-amor {
+      padding: 15px 25px;
+      font-size: 1.2em;
+      background-color: #b266ff;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      margin-top: 30px;
+      animation: pulse 2s infinite;
+      z-index: 3;
+      position: relative;
+    }
+    .boton-amor:hover {
+      background-color: #d1a3ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>💖Mi Niña Bonita 💖</h1>
+  <div class="mensaje">
+    Mi Ara 💗<br><br>
+    En tus brazos encontré lo que tanto quería.<br>
+    Soy tan feliz al estar contigo disfruto cada segundo contigo.<br>
+    Quiero darte todo mi amor y hacerte feliz y cuidarte muucho.<br>
+    El verte feliz es lo que más quiero.<br>
+    Gracias por alegrarme siempre mis días y todo mi mundo.<br><br>
+    <strong>Te amo y muuuchooo mi niña bonita &lt;3</strong>
+  </div>
+  <button onclick="mostrarAmor()" class="boton-amor">Haz clic aquí</button>
+  <div class="flor"></div>
+  <script>
+    function mostrarAmor() {
+      alert("Te Amo mi niña hermosa mi Ara cabeza de cartón <3");
+    }
+    function createFallingHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+      heart.style.opacity = Math.random();
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createFallingHeart, 250);
+
+    function createTeAmo(x, y) {
+      for (let i = 0; i < 6; i++) {
+        const teAmo = document.createElement("div");
+        teAmo.classList.add("te-amo");
+        teAmo.textContent = "Te Amo 💖";
+        const angle = Math.random() * 2 * Math.PI;
+        const radius = 50 + Math.random() * 30;
+        const offsetX = Math.cos(angle) * radius;
+        const offsetY = Math.sin(angle) * radius;
+        teAmo.style.left = `${x + offsetX}px`;
+        teAmo.style.top = `${y + offsetY}px`;
+        teAmo.style.fontSize = `${1 + Math.random()}em`;
+        teAmo.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 30 - 15}deg)`;
+        document.body.appendChild(teAmo);
+        setTimeout(() => teAmo.remove(), 1500);
+      }
+    }
+
+    document.addEventListener("click", (e) => createTeAmo(e.clientX, e.clientY));
+    document.addEventListener("touchstart", (e) => {
+      const touch = e.touches[0];
+      createTeAmo(touch.clientX, touch.clientY);
+    });
+  </script>
+</body>
+</html>
